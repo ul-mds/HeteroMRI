@@ -1,0 +1,10 @@
+dataset_name,address 
+ICBM,/projects/p_scads_lesion/Data_For_Dresden
+ADNI,/projects/p_scads_lesion/Data_For_Dresden
+ISBI,/projects/p_scads_lesion/Data_For_Dresden
+MSSEG,/projects/p_scads_lesion/Data_For_Dresden
+OASIS-3,/projects/p_scads_lesion/Data_For_Dresden
+UMCL,/projects/p_scads_lesion/Data_For_Dresden
+BTH,/projects/p_scads_lesion/Data_For_Dresden
+MSSEG-2,/projects/p_scads_lesion/Data_For_Dresden
+CERMEP,/projects/p_scads_lesion/Data_For_Dresden
