@@ -27,5 +27,5 @@ pip install openpyxl
 
 
 # Execute parallel application 
-srun python MRI_main_102.py
+srun python main.py
 
