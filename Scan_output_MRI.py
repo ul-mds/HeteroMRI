@@ -26,9 +26,6 @@ for index in range(len(all_MRI)):
         continue
     for indexj in range(1,len(address_data)):
         if all_MRI[index][1]==address_data[indexj][0]:
-            #print(address_data[indexj][1] + "/" + all_MRI.iloc[index][3] + "/" + "FLAIR.nii.gz")
-            #if "OASIS3"==address_data[indexj][0]:
-            #    all_MRI[index][3]=all_MRI[index][3][4:12]
             mri_file = address_data[indexj][1] + "/" + all_MRI[index][3]
             if not os.path.isdir(mri_file):
                 print("Not found path "+mri_file)
