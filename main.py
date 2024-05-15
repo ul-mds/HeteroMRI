@@ -12,13 +12,13 @@ select_id_we_want = ['A','B','C','D']
 number_shuffle=range(0,20)
 repeat_number = range(0,10)
 load_selected_ids = "none" #python"output_no_lesion_no_ADNI0/2023-10-23-12-23-14.pkl"#"none"#2023-10-11-18-10-04.pkl" #or
-output_path = "/beegfs/ws/0/nash272e-New_runs_MDS/CodeDgh/"
+output_path = "/output/"
 initial_learning_rate = 0.0001
 epochs = 100
 batch_size = 2
 decay_steps_model=100000
 decay_rate_model=0.96
-settings_using_protocols_only=['C','Ca','Cb','Cc','Cd','Ce','Cf','Cg','Ch','Ci','Cj','Ck','Cl','Cm','Cn','Co','Cp','Cq','Cr','Cs','Ct','Cu','Cv','Cw','Cx','Cy','Da','Db','Dc','Dd','De','Df','Dg','Dh','Di','Dj','Ea','Eb','F']
+settings_using_protocols_only=['B','C','D']
 #####################################################################################################################################
 #####################################################################################################################################
 def main(select_id_we_want,repeat_number,load_selected_ids,output_path,
