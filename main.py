@@ -9,7 +9,7 @@ assert len(physical_devices) > 0, "Not enough GPU hardware devices available"
 config = tf.config.experimental.set_memory_growth(physical_devices[0], True)
 
 select_id_we_want = ['A','B','C','D']
-number_shuffle=range(2,5)
+number_shuffle=range(0,20)
 repeat_number = range(0,10)
 load_selected_ids = "none" #python"output_no_lesion_no_ADNI0/2023-10-23-12-23-14.pkl"#"none"#2023-10-11-18-10-04.pkl" #or
 output_path = "/beegfs/ws/0/nash272e-New_runs_MDS/CodeDgh/"
