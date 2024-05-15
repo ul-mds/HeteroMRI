@@ -3,17 +3,13 @@ import pandas as pd
 
 class select_id_settings_class:
 
-	def __init__(self, name_settings_file="Exp_Settings.xlsx",select_settings=['A'],
+	def __init__(self, name_settings_file="Experimental_Settings.xlsx",select_settings=['A'],
 				 settings_using_protocols_only=['C','D'],name_list_mri_temp_file="All_MRIs_List_paths_temp.csv"):
 		#print("init_start")#,'C','D','E','F','G','H','I','J'    #
 		self.settings_file_MS_1 = pd.read_excel(open(name_settings_file, 'rb'),
-										   sheet_name='MS_1')
+										   sheet_name='Setting_A')
 		self.settings_file_MS_2 = pd.read_excel(open(name_settings_file, 'rb'),
-										   sheet_name='MS_2')
-		#self.settings_file_Cancer_1 = pd.read_excel(open(name_settings_file, 'rb'),
-		#									   sheet_name='Cancer_1')
-		#self.settings_file_Cancer_2 = pd.read_excel(open(name_settings_file, 'rb'),
-		#									   sheet_name='Cancer_2')
+										   sheet_name='Settings_B_C_D')
 		read_columns_list_mri = ["ID", "Dataset", "Research_group", "Subject_ID", "Protocol_Group", "Folder_Path",
 								 "Selected_Cluster", "Path_Selected_Cluster_File","Label"]
 		list_mri_all = pd.read_csv(name_list_mri_temp_file, sep='\t')
@@ -25,7 +21,6 @@ class select_id_settings_class:
 		setting_decoded = []
 		for index in range(len(title[0])):
 			if title[0][index] == "Name":
-				# for indexj in range(index,index+3):
 				row = []
 				for indexk in range(len(setting)):
 					if str(setting[indexk][index]) != 'nan':
@@ -145,9 +140,6 @@ class select_id_settings_class:
 		#print("generate_id_settings_start")
 		settings_file_MS_1_list = self.read_settings(self.settings_file_MS_1)
 		settings_file_MS_2_list = self.read_settings(self.settings_file_MS_2)
-		#settings_file_Cancer_1_list = self.read_settings(self.settings_file_Cancer_1)
-		#settings_file_Cancer_2_list = self.read_settings(self.settings_file_Cancer_2)
-		#all_Settings = [settings_file_MS_1_list, settings_file_MS_2_list, settings_file_Cancer_1_list,settings_file_Cancer_2_list]
 		all_Settings = [settings_file_MS_1_list, settings_file_MS_2_list]
 		settings_decoded = []
 		settings_id = []
