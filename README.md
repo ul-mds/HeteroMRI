@@ -1,2 +1,2 @@
-# CNN_intensity_clustering
-A model for classification of MRI data
+# HeteroMRI
+A novel method for classification of heterogenous brain MRIs. Here, heterogenous means the MRIs used for training the model have been acquired using different MRI scanners and acquisition protocols.
