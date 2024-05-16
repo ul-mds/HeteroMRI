@@ -4,8 +4,8 @@ import os
 import nibabel as nib
 import math
 csvdata=[]
-csvadata_file_name="MRIs_List_Final_new.csv"
-address_data_file_name="address_output.csv"
+csvadata_file_name="MRIs_List.csv"
+address_data_file_name="datasets_path.csv"
 output_file="All_MRIs_List_paths_temp.csv"
 address_data=[]
 
