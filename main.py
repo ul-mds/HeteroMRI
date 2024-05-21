@@ -28,9 +28,12 @@ settings_using_protocols_only=['B','C','D']# List of experimental setting names,
 #####################################################################################################################################
 def main(select_id_we_want,repeat_number,load_selected_ids,output_path,
 		 initial_learning_rate,epochs,batch_size,decay_steps_model,decay_rate_model):
+	# Definition and initialization of all classes we want to use
 	time_info=io_class.time_info_class()
 	io_manager = io_class.io_calss(output_path)
 	io_manager.make_dir(output_path,None,name_dir_add=False)
+	# If this condition is True, training, evaluating, and testing lists will be generated randomly and saved in a pkl file.
+	# If the condition is False, the pkl file will be loaded into the variables.
 	if load_selected_ids.lower() =="none":
 		time_info.start_record_time()
 		select_id_settings=select_calss.select_id_settings_class(select_settings=select_id_we_want,
@@ -58,6 +61,7 @@ def main(select_id_we_want,repeat_number,load_selected_ids,output_path,
 			#print(len(aggregation_temp[0]) + len(aggregation_temp[1]) + len(aggregation_temp[2]))
 
 
+	# Load all MRI files, which were selected in the last part, into memory
 	settings_selected_all_paths=io_manager.load_path_mris(settings_selected_all)
 
 	CNN=CNN_model.CNN_class(initial_learning_rate_model= initial_learning_rate ,epochs_model= epochs,batch_size_model= batch_size,
