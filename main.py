@@ -1,24 +1,29 @@
+# Load all the packages used in this file.
 import tensorflow as tf
 import pickle
 import time
 import select_id_settings_class as select_calss
 import CNN_model
 import io_class
+
+# Check for available GPU drivers and set the initial settings for usage.
 physical_devices = tf.config.experimental.list_physical_devices('GPU')
 assert len(physical_devices) > 0, "Not enough GPU hardware devices available"
 config = tf.config.experimental.set_memory_growth(physical_devices[0], True)
 
-select_id_we_want = ['A','B','C','D']
-number_shuffle=range(0,20)
-repeat_number = range(0,10)
-load_selected_ids = "none" #python"output_no_lesion_no_ADNI0/2023-10-23-12-23-14.pkl"#"none"#2023-10-11-18-10-04.pkl" #or
-output_path = "/output/"
-initial_learning_rate = 0.0001
-epochs = 100
-batch_size = 2
-decay_steps_model=100000
-decay_rate_model=0.96
-settings_using_protocols_only=['B','C','D']
+# Set settings
+select_id_we_want = ['A','B','C','D']# Select a list of experimental settings for running
+number_shuffle=range(0,20)# The number of shuffles for running 
+repeat_number = range(0,10)# The number of repetitions for each shuffle state
+# Load a specific selection of MRI lists for training, evaluating, and testing, or "none" to generate random MRI lists
+load_selected_ids = "none"# Example options: "output_no_lesion_no_ADNI0/2023-10-23-12-23-14.pkl" or "none"
+output_path = "/output/"# Path for saving all model outputs
+initial_learning_rate = 0.0001 # Controls the weights of our model with respect to the loss gradient
+epochs = 100 # The number of epochs for training our model
+batch_size = 2 # The number of samples fed into the model at each iteration during training
+decay_steps_model=100000# Number of steps after which the learning rate drops
+decay_rate_model=0.96 # Factor by which the learning rate decreases over time
+settings_using_protocols_only=['B','C','D']# List of experimental setting names, selected by protocol name attribute for training, evaluating, and testing
 #####################################################################################################################################
 #####################################################################################################################################
 def main(select_id_we_want,repeat_number,load_selected_ids,output_path,
