@@ -1,3 +1,4 @@
+# Load all the packages used in this file.
 import numpy as np
 import tensorflow as tf
 import pandas as pd
@@ -71,10 +72,8 @@ class CNN_class:
 
         # Build model.
         model = self.get_model(width=self.width_g, height=self.height_g, depth=self.depth_g)
-        # model = get_model(width=193, height=229, depth=193)
         model.summary()
 
-        ##*************************************************************************************
         # Compile model.
 
         lr_schedule = keras.optimizers.schedules.ExponentialDecay(
@@ -106,8 +105,6 @@ class CNN_class:
 
     def test_model(self, path_model):
         x_test, y_test, ID = self.test_data
-        #x_test = np.array([self.process_scan(path) for path in x_test_paths])
-        #criterion = tf.keras.losses.CategoricalCrossentropy()
         model = self.get_model(width=self.width_g, height=self.height_g, depth=self.depth_g)
         model.load_weights(path_model)
         results=[]
@@ -115,8 +112,6 @@ class CNN_class:
         predicted_results=[]
         for y, x, i in zip(y_test, x_test,ID):
             prediction = model.predict(np.expand_dims(x, axis=0))[0]
-            # print(model.predict(np.expand_dims(x, axis=0)))
-            # scores = [1 - prediction[0], prediction[0]]
             real_results.append(y)
             if (prediction[0] > 0.5):
                 results.append([i,prediction[0],1,y])
@@ -131,45 +126,28 @@ class CNN_class:
                   "Matthews_corrcoef", "Specificity"]
 
         results_valid=pd.DataFrame([results_valid])
-
         results_valid.columns = headers
-        # acc = accuracy_score(targets.numpy(), predicted.numpy())
-        # bacc = balanced_accuracy_score(targets.numpy(), predicted.numpy())
-        # prec = precision_score(targets.numpy(), predicted.numpy())
-        # rec = recall_score(targets.numpy(), predicted.numpy())
-        # f1 = f1_score(targets.numpy(), predicted.numpy())
-        # mc = matthews_corrcoef(targets.numpy(), predicted.numpy())
-        #True positive
-        #False positive
-        #True negative
-        #False negative
         headers = ["ID","Prediction%","Prediction","Label"]
         results=pd.DataFrame(results)
         results.columns = headers
         return results_valid,results
     def valid(self,targets_test, predicted_test):
-        # print(X_test)
-        # print(type(X_test))
-        targets = np.array(targets_test)  # =np.float_)#torch.from_numpy(X_test).float()
-        predicted = np.array(predicted_test)  # ,dtype=np.float_)#torch.from_numpy(y_test).long()
-        # outputs = inputs #model(inputs)
-        #predicted = inputs
-        # loss = criterion(outputs, targets)
-        # _, predicted = torch.max(outputs, 1)
-        # cm = confusion_matrix(targets.numpy(), predicted.numpy())
-        #print(targets)
-        #print(type(targets))
-        #print(predicted)
-        #print(type(predicted))
-
+        # Calculation of validation parameters
+        #  -acc  = accuracy score
+        #  -bacc = balanced accuracy score    -removed!
+        #  -prec = precision score
+        #  -rec  = recall score
+        #  -f1   = f1 score
+        #  -mc   = matthews corrcoef
+        #  -spe  = specificity
+        #  -tp   = True positive
+        #  -fp   = False positive
+        #  -tn   = True negative
+        #  -fn   = False negative
+        targets = np.array(targets_test) 
+        predicted = np.array(predicted_test)
         cm = confusion_matrix(targets, predicted)
         tn, fp, fn, tp = cm[0][0], cm[0][1], cm[1][0], cm[1][1]
-        # acc = accuracy_score(targets.numpy(), predicted.numpy())
-        # bacc = balanced_accuracy_score(targets.numpy(), predicted.numpy())
-        # prec = precision_score(targets.numpy(), predicted.numpy())
-        # rec = recall_score(targets.numpy(), predicted.numpy())
-        # f1 = f1_score(targets.numpy(), predicted.numpy())
-        # mc = matthews_corrcoef(targets.numpy(), predicted.numpy())
         with np.errstate(divide='ignore', invalid='ignore'):
             acc = (tp + tn) / (tp + fp + fn + tn)
             #bacc = (tp / (tp + fn) + tn / (fp + tn)) / 2
@@ -177,47 +155,35 @@ class CNN_class:
             rec = tp / (tp + fn)
             f1 = 2 * tp / (2 * tp + fn + fp)
             mc = ((tp * tn) - (fp * fn)) / np.sqrt((tp + fp) * (tp + fn) * (tn + fp) * (tn + fn))
-            spe = tn / (tn + fp)#specificity
+            spe = tn / (tn + fp)
             if (math.isnan(mc)):
                 mc = 0
             if (math.isnan(prec)):
                 prec = 0
-        # return loss.item(), tn, fp, fn, tp, acc, bacc, prec, rec, f1, mc
         return [tn, fp, fn, tp, acc, prec, rec, f1, mc, spe]
 
 
 
-    def normalize(self, volume):
-        """Normalize the volume"""
-        min = -1000
-        max = 400
-        volume[volume < min] = min
-        volume[volume > max] = max
-        volume = (volume - min) / (max - min)
-        volume = volume.astype("float32")
-        return volume
-
-    def resize_volume(self,img):
-        """Resize across z-axis"""
+    def remove_noise_volume(self,img):
+        # Remove noise from volumes
 
         for indexi in range(len(img)):
             for indexj in range(len(img[0])):
                 for indexk in range(len(img[0][0])):
-                    if img[indexi,indexj,indexk]< 0.50:
+                    if img[indexi,indexj,indexk]< 0.50: # This value was obtained experimentally. It can be changed for other applications.
                         img[indexi, indexj, indexk]=0
 
         if (self.width_g == None):
             self.width_g = img.shape[0]
             self.height_g = img.shape[1]
             self.depth_g = img.shape[-1]
-        # Rotate
+        # Rotate the image
         img = ndimage.rotate(img, 90, reshape=False)
 
         return img
 
     def read_nifti_file(self,filepath):
-        """Read and load volume"""
-        # Read file
+        # Read and load volume
         for try_read in range(0,10):
             try:
                 scan = nib.load(filepath)
@@ -225,20 +191,17 @@ class CNN_class:
             except:
                 print("Bad file descriptor(warning)"+filepath)
                 print("Try to read " + filepath+" for "+str(try_read+1)+" time!")
-                #scan = nib.load(filepath)
 
-        #scan = nib.load(filepath)
+
         # Get raw data
         scan = scan.get_fdata()
         return scan
     def process_scan(self,path):
-        """Read and resize volume"""
+        # Read volume and Remove noise
         # Read scan
         volume = self.read_nifti_file(path)
-        # Normalize
-        # volume = normalize(volume)
-        # Resize width, height and depth
-        volume = self.resize_volume(volume)
+        # Remove noise
+        volume = self.remove_noise_volume(volume)
         return volume
     def load_MRI_files(self, train_mri_paths, evaluation_mri_paths, test_mri_paths):
         x_train_paths, y_train = train_mri_paths
@@ -255,7 +218,7 @@ class CNN_class:
 
 
     def get_model(self,width, height, depth):
-        """Build a 3D convolutional neural network model."""
+        # Build a 3D convolutional neural network model.
 
         inputs = keras.Input((width, height, depth, 1))
 
