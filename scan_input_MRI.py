@@ -1,3 +1,9 @@
+# First of all, we need to generate "All_MRIs_List_paths_temp.csv" by running this file.
+#Please:
+#       - Update the "MRIs_List.csv" file if necessary!
+#       - Set the correct path(s) in "datasets_path.csv"
+
+# Load all the packages used in this file.
 import pandas as pd
 import csv
 import os
@@ -9,8 +15,11 @@ address_data_file_name="datasets_path.csv"
 output_file="All_MRIs_List_paths_temp.csv"
 address_data=[]
 
+# Remove the output file if it already exists
 if os.path.exists(output_file):
   os.remove(output_file)
+
+# Read dataset paths from CSV
 with open(address_data_file_name, newline='') as f:
     reader = csv.reader(f, delimiter=',', quoting=csv.QUOTE_NONE)
     for row in reader:
@@ -53,12 +62,14 @@ for index in range(len(all_MRI)):
 
             found=False
             break
-
+print("Scan MRI files: done.")
+# Exit if there was an error
 if Eroor_flag:
     exit()
+# Write the updated MRI data to the output file
 with open(output_file,"w+") as my_csv:
     writer = csv.DictWriter(my_csv,delimiter='\t', fieldnames = headers)
     writer.writeheader()
     csvWriter = csv.writer(my_csv,delimiter='\t')
     csvWriter.writerows(all_MRI)
-print("Scan MRI files: done")
+print("Success in "+output_file+ " generation.")
