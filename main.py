@@ -36,8 +36,7 @@ def main(select_id_we_want,repeat_number,load_selected_ids,output_path,
 	# If the condition is False, the pkl file will be loaded into the variables.
 	if load_selected_ids.lower() =="none":
 		time_info.start_record_time()
-		select_id_settings=select_calss.select_id_settings_class(select_settings=select_id_we_want,
-																 settings_using_protocols_only= settings_using_protocols_only,)
+		select_id_settings=select_calss.select_id_settings_class(select_settings=select_id_we_want,settings_using_protocols_only= settings_using_protocols_only,)
 		settings_selected_all=select_id_settings.generate_id_settings()
 		name_selected_settings_file = "Selected_Ids_Setting_"+select_id_we_want[0]+"_"+time.strftime("%Y-%m-%d-%H-%M-%S.pkl")
 		with open(output_path+"/"+name_selected_settings_file, 'wb') as f:
@@ -63,7 +62,7 @@ def main(select_id_we_want,repeat_number,load_selected_ids,output_path,
 
 	# Load all MRI files, which were selected in the last part, into memory
 	settings_selected_all_paths=io_manager.load_path_mris(settings_selected_all)
-
+	# Definition and initialization of the CNN class
 	CNN=CNN_model.CNN_class(initial_learning_rate_model= initial_learning_rate ,epochs_model= epochs,batch_size_model= batch_size,
 							decay_steps_model= decay_steps_model,decay_rate_model= decay_rate_model)
 	for index in range(len(settings_selected_all_paths)):
@@ -85,18 +84,18 @@ def main(select_id_we_want,repeat_number,load_selected_ids,output_path,
 				time_info.start_record_time()
 				path_save=select_id_we_want[index]+"/"+select_id_we_want[index]+format(indexi, '02d')+"/run"+format(index_run+1, '02d')
 				io_manager.make_dir(output_path,path_save)
-				path_model_save="/Model.h5"
+				path_model_save="/Model.h5" # Set the name of the file for saving the weights of our CNN trained model
 				print("###########################Training (Run"+str(index_run+1)+")###########################")
+				# Start training our CNN model 
 				history_train_log=CNN.train_model(output_path+"/"+path_save+path_model_save)
 				print("###########################Testing (Run"+str(index_run+1)+")###########################")
+				# Start tasting our CNN model 
 				results_valid,results=CNN.test_model(output_path+"/"+path_save+path_model_save)
 				time_info.add_log(time_info.stop_record_time(),
 								  "Runtime for Setting " + select_id_we_want[index] + " (Run" + format(index_run+1, '02d')+")",
 								  "Path: " + path_save)
-				#time_info.add_log(time_info.get_time_from_beginning(),
-				#				  "Runtime from the beginning",
-				#				  "For the first run, the runtime is more than others because the selecting or the loading parts!")
 				print("###########################Saving results (Run"+str(index_run+1)+")###########################")
+				# Start saving our CNN model results
 				log_path = output_path+"/"+path_save
 				if output_path== "./":
 					log_path = output_path+path_save
