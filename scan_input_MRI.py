@@ -1,5 +1,5 @@
 # First of all, we need to generate "All_MRIs_List_paths_temp.csv" by running this file.
-#Please:
+# Please:
 #       - Update the "MRIs_List.csv" file if necessary!
 #       - Set the correct path(s) in "datasets_path.csv"
 
