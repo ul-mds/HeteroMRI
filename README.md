@@ -11,14 +11,17 @@ This repository contains material associated with the paper "***HeteroMRI: A met
   - saves the trained models
   - writes an *.xlsx file that includes the list of training, validation, and test data and the calculated metric values for each model
 
-## System requirements
+## Hardware requirements
 
-This program is executed with the current architecture on at least a 40GB NVIDIA GPU with a batch size of 2. If you encounter memory limitation errors during execution, please consider changing the version of TensorFlow you are using.
+This code with the current CNN architecture needs a NVIDIA GPU with at least 40 GB of GPU memory even with a batch size of 2. 
+
+If you encountered a GPU out-of-memory error while training the model, please consider changing the version of your TensorFlow since some Tensorflow versions load more data than the batch size in the GPU memory!
 
 
-## Preprocessing
-
-First, preprocess all MRI files using the FlexiMRIprep pipeline. You can find FlexiMRIprep [here](https://github.com/ul-mds/FlexiMRIprep).
+## How to use HeteroMRI
+You can use brain MRIs from different datasets to train and test the model. 
+  ### Preprocessing
+First, preprocess all the MRI files using the [FlexiMRIprep](https://github.com/ul-mds/FlexiMRIprep) pipeline.
 
 ```bash
 python scan_input_MRI.py
