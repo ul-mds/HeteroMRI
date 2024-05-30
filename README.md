@@ -9,7 +9,7 @@ This repository contains material associated with the paper "***HeteroMRI: A met
   - selects the necessary number of MRIs from the `MRIs_List.csv` based on the `Experimental_Settings.xlsx`
   - trains and tests the CNN classification model
   - saves the trained models
-  - writes an *.xlsx file that includes the list of training, validation, and test data and the calculated metric values for each model
+  - writes an `*.xlsx` file that includes the list of training, validation, and test data and the calculated metric values for each model
 
 ## Hardware requirements
 
