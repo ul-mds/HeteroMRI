@@ -43,48 +43,14 @@ First, preprocess all MRI files using the FlexiMRIprep pipeline. You can find Fl
 Use the following parameters for the preprocessing step, as detailed in our paper:
 
 ```bash
-ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=8 export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS
 python main.py -s "422256" -m "non" -lm "" -i "./input" -o "./output" -s2 r:1
 ```
 
 
 ## Batch Script Parameters
 
-Below is an example of a batch script (`batch_script.sh`) used for submitting jobs to a cluster. Key parameters that users need to modify are explained.
+Please update the parameters in the `batch_script.sh` file for submitting jobs to a cluster.
 
-```bash
-#!/bin/bash
-
-#SBATCH --job-name="codeC"           # Job name
-#SBATCH --mail-user=***************  # Email address for notifications
-#SBATCH --mail-type=ALL              # Type of notifications (BEGIN, END, FAIL, ALL)
-#SBATCH --time=03-00:00:00           # Time limit (D-HH:MM:SS)
-#SBATCH --partition=*****            # Partition name
-#SBATCH --nodes=1                    # Number of nodes
-#SBATCH --ntasks=1                   # Number of tasks
-#SBATCH --mincpus=1                  # Minimum number of CPUs
-#SBATCH --cpus-per-task=16           # Number of CPUs per task
-#SBATCH --gres=gpu:1                 # Number of GPUs
-#SBATCH --gpus-per-task=1            # GPUs per task
-#SBATCH --mem-per-cpu=8G             # Memory per CPU
-#SBATCH --output=slurm-%j.out        # Standard output log file
-#SBATCH --error=slurm-%j.err         # Standard error log file
-
-# Setup computational environment, i.e, load desired modules
-module load release/23.04  
-module load GCC/11.3.0  
-module load OpenMPI/4.1.4
-module load scikit-learn/1.1.2
-module load TensorFlow/2.11.0-CUDA-11.7.0
-
-# Install required Python packages
-pip install nibabel
-pip install xlsxwriter
-pip install openpyxl
-
-# Execute parallel application 
-srun python main.py
-```
 
 ## Contributing
 
