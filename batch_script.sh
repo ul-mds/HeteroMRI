@@ -16,11 +16,10 @@
 #SBATCH --error=slurm-%j.err
 
 # Setup computational environment, i.e, load desired modules
-module load release/23.04  
-module load GCC/11.3.0  
-module load OpenMPI/4.1.4
-module load scikit-learn/1.1.2
-module load TensorFlow/2.11.0-CUDA-11.7.0
+module load modenv/scs5
+module load scikit-learn/1.0.2-foss-2021b
+module load TensorFlow/2.4.1-fosscuda-2020b
+pip install -U scikit-learn
 pip install nibabel
 pip install xlsxwriter
 pip install openpyxl
