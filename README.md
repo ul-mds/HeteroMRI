@@ -23,12 +23,17 @@ You can use brain MRIs from different datasets to train and test the model.
   ### Preprocessing
 First, preprocess all the MRI files using the [FlexiMRIprep](https://github.com/ul-mds/FlexiMRIprep) pipeline.
 
+Use the following parameters for the preprocessing step, as detailed in our paper:
+
 ```bash
-python scan_input_MRI.py
+python main.py -s "422256" -m "non" -lm "" -i "./input" -o "./output" -s2 r:1
 ```
 
 Next, run the `scan_input_MRI.py` script to generate a new file named `All_MRIs_List_paths_temp.csv` using the contents of `MRIs_List.csv` and `datasets_path.csv`.
 
+```bash
+python scan_input_MRI.py
+```
 
 ## Batch Script Parameters
 
