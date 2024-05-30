@@ -11,15 +11,6 @@ This repository contains material associated with the paper "***HeteroMRI: A met
   - saves the trained models
   - writes an *.xlsx file that includes the list of training, validation, and test data and the calculated metric values for each model
 
-
-## Table of Contents
-
-- [System requirements](#System-requirements)
-- [Preprocessing](#preprocessing)
-- [Batch Script Parameters](#batch-script-parameters)
-- [License](#license)
-
-
 ## System requirements
 
 This program is executed with the current architecture on at least a 40GB NVIDIA GPU with a batch size of 2. If you encounter memory limitation errors during execution, please consider changing the version of TensorFlow you are using.
