@@ -13,35 +13,66 @@ This repository contains material associated with the paper "***HeteroMRI: A met
 
 ## Hardware requirements
 
-This code with the current CNN architecture needs a NVIDIA GPU with at least 40 GB of GPU memory even with a batch size of 2. 
+This code with the current CNN architecture needs an NVIDIA GPU with at least 40 GB of GPU memory (such as NVIDIA A100) even with a batch size of 2. 
 
 If you encountered a GPU out-of-memory error while training the model, please consider changing the version of your TensorFlow since some Tensorflow versions load more data than the batch size in the GPU memory!
 
 
 ## How to use HeteroMRI
-You can use brain MRIs from different datasets to train and test the model. 
-  ### Preprocessing
-First, preprocess all the MRI files using the [FlexiMRIprep](https://github.com/ul-mds/FlexiMRIprep) pipeline.
-
-Use the following parameters for the preprocessing step, as detailed in our paper:
-
-```bash
+  - ### Preparing your `MRIs_List.csv`
+    You can use brain MRIs from different datasets to train and test the model. Make a list of all the data identical to `MRIs_List.csv`. The following columns of `MRIs_List.csv` are required to be filled as they are needed by the code. You can leave the other columns empty but _do not delete_ them.
+    + `ID`
+    + `Dataset` (only necessary if you have experimental settings that choose data based on their dataset name, such as setting _A_ in the paper),
+    + `Label`
+    + `Subject_ID`
+    + `Protocol_Group` (only necessary if you have experimental settings that choose data based on the MRI protocol, such as setting _B, C, D_ in the paper)
+    + `Selected_Cluster` (See [Selecting the right cluster](https://github.com/ul-mds/HeteroMRI#Selecting-the-right-cluster))
+   
+    
+  - ### Preprocessing
+First, all the MRI files should be preprocessed using the [FlexiMRIprep](https://github.com/ul-mds/FlexiMRIprep) pipeline. After setting up the pipeline, run the following command to perform all the necessary MRI preprocessing steps (as detailed in the paper mentioned above) on all the MRIs automatically:
+```
 python main.py -s "422256" -m "non" -lm "" -i "./input" -o "./output" -s2 r:1
 ```
+  - ### Selecting the right cluster
+  In the output folder of the preprocessing pipeline, for each MRI, you will find the following 3 white-matter intensity clusters:
+  ```
+  FLAIR_rfcm-mem1.nii.gz
+  FLAIR_rfcm-mem2.nii.gz
+  FLAIR_rfcm-mem3.nii.gz
+  ```
+Only one of these clusters will be used in the model (either for training or testing the model). In this version of the code, choosing the right intensity cluster is done manually.
+For example, consider the 3 clusters shown below for a sample MRI:
 
-Next, run the `scan_input_MRI.py` script to generate a new file named `All_MRIs_List_paths_temp.csv` using the contents of `MRIs_List.csv` and `datasets_path.csv`.
+![The three clusters](sample_white_matter_clusters.png)
 
-```bash
+In almost all MRIs (but not all) the 3 clusters look visually the same as the 3 clusters above. We are interested in cluster 3 (as it includes the traces of white-matter abnormalities in the MRIs that have white-matter abnormality). Therefore, for each MRI, we manually find the cluster that visually looks similar to cluster 3 in the figure above. The number of the desired cluster (1,2, or 3) should be entered in the `MRIs_List.csv` in the column `Selected_Cluster`. For our data, the desired cluster was cluster 3 in more than 90% of MRIs, and in the rest, it was cluster 2. 
+
+- ### Dataset(s) path
+Enter the path to the folder which includes the intensity clusters of the dataset(s) in `datasets_path.csv`.
+
+- ### Scanning input data for the model
+In this step, the code checks whether the (right) intensity cluster for all MRIs of `MRIs_List.csv` exists in the dataset's path. Run the following code:
+```
 python scan_input_MRI.py
 ```
+A new file named `All_MRIs_List_paths_temp.csv` is generated which is same as `MRIs_List.csv` except that the path to the right cluster is added to its last column ("`Path_Selected_Cluster_File`").
 
-## Batch Script Parameters
+- ### Set model parameters
+  Set the parameters of the model in `main.py`, including the experimental settings names (from `Experimental_Settings.xlsx`) that you wish to run, the number shuffles, the number of runs for each shuffle, the number of epochs, etc.
+- ### Running the model
+We have trained the model on an HPC cluster with the Slurm system using the script `batch_script.sh`. Please update the parameters according to the HPC cluster you are using.
+Considering the hardware requirement mentioned above, you will most probably need an HPC cluster, however, if you want to run the code directly on a local machine, you will need to manually install the required Python packages.
 
-Please update the parameters in the `batch_script.sh` file for submitting jobs to a cluster.
+- ### Output
+In the output folder, the best trained model for each experimental setting is saved. in addition, an *.xlsx file is generated for each model that includes the list of training, validation, and test data and the calculated metric values.
 
-This code has always been executed using SLURM. If you want to run the code directly on your local machine, you will need to manually install the required Python packages.
+## Citation
+If this repository was helpful for your project, please cite the following paper:
+```
+To be announced soon
+```
 
 ## License
-
 This project is licensed under the GPL-3.0 license - see the [LICENSE](LICENSE) file for details.
 
