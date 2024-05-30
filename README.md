@@ -22,7 +22,7 @@ This repository contains material associated with the paper "***HeteroMRI: A met
 
 ## System requirements
 
-We executed this program on a 40GB NVIDIA GPU with a batch size of 2. If you encounter memory limitation errors during execution, please consider changing the version of TensorFlow you are using.
+This program is executed with the current architecture on at least a 40GB NVIDIA GPU with a batch size of 2. If you encounter memory limitation errors during execution, please consider changing the version of TensorFlow you are using.
 
 
 ## Preprocessing
