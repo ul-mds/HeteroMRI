@@ -20,17 +20,17 @@ If you encountered a GPU out-of-memory error while training the model, please co
 
 ## How to use HeteroMRI
   - ### Preparing your `MRIs_List.csv`
-    You can use brain MRIs from different datasets to train and test the model. Make a list of all the data identical to `MRIs_List.csv`. The following columns of `MRIs_List.csv` are required to be filled as they are needed by the code. You can leave the other columns empty but _do not delete_ them.
-    + `ID`
-    + `Dataset` (only necessary if you have experimental settings that choose data based on their dataset name, such as setting _A_ in the paper),
-    + `Label`
-    + `Subject_ID`
-    + `Protocol_Group` (only necessary if you have experimental settings that choose data based on the MRI protocol, such as setting _B, C, D_ in the paper)
+    You can use brain MRIs from different datasets to train and test the model. Make a list of all the data identical to `MRIs_List.csv`. The following columns of `MRIs_List.csv` are required to be filled as they are needed by the code. You can leave the other columns empty but please _do not delete_ them.
+    + `ID` (a unique arbitrary identifier)
+    + `Dataset` (name of the dataset)
+    + `Label` (1: if the brain has white-matter abnormalities, 0: if the brain has no white-matter abnormalities)
+    + `Subject_ID` (Patient identifier)
+    + `Protocol_Group` (only necessary if you have experimental settings that choose data based on the MRI protocol, such as setting _B, C, D_ in the paper) (See [Protocol naming convention](https://github.com/ul-mds/HeteroMRI#Protocol-naming-convention))
     + `Selected_Cluster` (See [Selecting the right cluster](https://github.com/ul-mds/HeteroMRI#Selecting-the-right-cluster))
    
     
   - ### Preprocessing
-First, all the MRI files should be preprocessed using the [FlexiMRIprep](https://github.com/ul-mds/FlexiMRIprep) pipeline. After setting up the pipeline, run the following command to perform all the necessary MRI preprocessing steps (as detailed in the paper mentioned above) on all the MRIs automatically:
+First, all the MRI files should be preprocessed using the [FlexiMRIprep](https://github.com/ul-mds/FlexiMRIprep) pipeline. After setting up the pipeline, run the following command to perform all the necessary MRI preprocessing steps (as detailed in the paper) on all the MRIs automatically:
 ```
 python main.py -s "422256" -m "non" -lm "" -i "./input" -o "./output" -s2 r:1
 ```
@@ -59,13 +59,16 @@ python scan_input_MRI.py
 A new file named `All_MRIs_List_paths_temp.csv` is generated which is same as `MRIs_List.csv` except that the path to the right cluster is added to its last column ("`Path_Selected_Cluster_File`").
 
 - ### Set model parameters
-  Set the parameters of the model in `main.py`, including the experimental settings names (from `Experimental_Settings.xlsx`) that you wish to run, the number shuffles, the number of runs for each shuffle, the number of epochs, etc.
+  Set the parameters of the model in `main.py`, including the experimental settings names (from `Experimental_Settings.xlsx`) that you wish to run, the number of shuffles, the number of runs for each shuffle, the number of epochs, etc.
 - ### Running the model
 We have trained the model on an HPC cluster with the Slurm system using the script `batch_script.sh`. Please update the parameters according to the HPC cluster you are using.
-Considering the hardware requirement mentioned above, you will most probably need an HPC cluster, however, if you want to run the code directly on a local machine, you will need to manually install the required Python packages.
+Considering the [hardware requirements](https://github.com/ul-mds/HeteroMRI#hardware-requirements), you will most probably need an HPC cluster, however, if you want to run the code directly on a local machine, you will need to manually install the required Python packages.
 
 - ### Output
-In the output folder, the best trained model for each experimental setting is saved. in addition, an *.xlsx file is generated for each model that includes the list of training, validation, and test data and the calculated metric values.
+In the output folder, the best trained model for each experimental setting is saved. In addition, an `*.xlsx` file is generated for each model that includes the list of training, validation, and test data and the calculated metric values.
+
+### MRI protocol naming convention
+We have assigned a protocol name to each of the MRIs. The MRI protocol name is generated based on a naming convention. For example, consider the protocol name `Sie_TrT_30_Prot1`. The first three characters determine the MR scanner manufacturer (here, Siemens). The second three characters show the MR scanner model (here, TrioTim). The next two digits indicate the magnetic field strength of the scanner in Tesla multiplied by ten to avoid a decimal dot in the protocol name (here, 3 Tesla). The final characters are related to the acquisition time parameters (namely, TE, TR, and TI). For example, the protocol `Sie_TrT_30_Prot2` differs in the acquisition time parameters compared to `Sie_TrT_30_Prot1` protocol. If any of the above-mentioned information is missing for an MRI, we use `NA` instead of that in the protocol name.
 
 ## Citation
 If this repository was helpful for your project, please cite the following paper:
