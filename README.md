@@ -12,29 +12,18 @@ This repository contains material associated with the paper "***HeteroMRI: A met
   - writes an *.xlsx file that includes the list of training, validation, and test data and the calculated metric values for each model
 
 
-
 ## Table of Contents
 
-- [Installation](#installation)
+- [System requirements](#System-requirements)
 - [Preprocessing](#preprocessing)
 - [Batch Script Parameters](#batch-script-parameters)
-- [Contributing](#contributing)
 - [License](#license)
 
-## Installation
 
-Step-by-step instructions on how to get the development environment running.
+## System requirements
 
-```bash
-# Clone the repository
-git clone https://github.com/your-username/HeteroMRI.git
+We executed this program on a 40GB NVIDIA GPU with a batch size of 2. If you encounter memory limitation errors during execution, please consider changing the version of TensorFlow you are using.
 
-# Navigate to the project directory
-cd HeteroMRI
-
-# Install python packages 
-
-```
 
 ## Preprocessing
 
@@ -51,12 +40,9 @@ Next, run the `scan_input_MRI.py` script to generate a new file named `All_MRIs_
 
 Please update the parameters in the `batch_script.sh` file for submitting jobs to a cluster.
 
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://github.com/your-username/HeteroMRI/CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
+This code has always been executed using SLURM. If you want to run the code directly on your local machine, you will need to manually install the required Python packages.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+This project is licensed under the GPL-3.0 license - see the [LICENSE](blob/main/LICENSE) file for details.
 
