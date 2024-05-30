@@ -1,6 +1,16 @@
 # HeteroMRI
-
 A novel method for classification of heterogenous brain MRIs. Here, heterogenous means the MRIs used for training the model have been acquired using different MRI scanners and acquisition protocols.
+
+This repository contains material associated with the paper "***HeteroMRI: A method for classification of multi-scanner and multi-protocol brain MRIs with deep learning***", including:
+
+- **MRIs_List.csv**: The list of all MRIs (from public repositories) used in the paper 
+- **Experimental_Settings.xlsx**: The experimental settings implemented in the paper
+- The Python code that
+  - selects the necessary number of MRIs from the `MRIs_List.csv` based on the `Experimental_Settings.xlsx`
+  - trains and tests the CNN classification model
+  - saves the trained models
+  - and writes an *.xlsx file that includes the list of training, validation, and test data and the calculated metric values
+
 
 
 ## Table of Contents
