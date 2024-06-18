@@ -37,7 +37,6 @@ class io_calss:
             os.makedirs(directory)
     def write_results(self, results_valid, results, inputs, log, system_info, path, history_train_log,
                       file_name="results.xlsx"):
-        #new_list = [["first", "second"], ["third", "four"], ["five", "six"]]
         #df = pd.DataFrame(results_valid)
         train_id, evaluation_id, test_id=inputs
 
