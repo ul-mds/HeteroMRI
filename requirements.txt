@@ -1,0 +1,10 @@
+protobuf==3.19.6
+nibabel
+scikit-learn
+xlsxwriter
+openpyxl
+pandas
+wheel
+pip
+psutil
+xlrd==1.2.0
