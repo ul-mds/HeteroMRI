@@ -70,6 +70,29 @@ In the output folder, the best trained model for each experimental setting is sa
 
 ### MRI protocol naming convention
 We have assigned a protocol name to each of the MRIs. The MRI protocol name is generated based on a naming convention. For example, consider the protocol name `Sie_TrT_30_Prot1`. The first three characters determine the MR scanner manufacturer (here, Siemens). The second three characters show the MR scanner model (here, TrioTim). The next two digits indicate the magnetic field strength of the scanner in Tesla multiplied by ten to avoid a decimal dot in the protocol name (here, 3 Tesla). The final characters are related to the acquisition time parameters (namely, TE, TR, and TI). For example, the protocol `Sie_TrT_30_Prot2` differs in the acquisition time parameters compared to the `Sie_TrT_30_Prot1` protocol. If any of the above-mentioned information is missing for an MRI, we use `NA` instead of that in the protocol name.
+### Containerize (Docker)
+#### Building the Docker Image
+To build the Docker image, navigate to the directory containing the Dockerfile and run the following command:
+```
+sudo docker build -t heteromri .
+```
+#### Running the Docker Container
+To run the Docker container, use the following command:
+```
+docker run  --gpus all --volume=/the_intensity_clusters_of_the_dataset_on_local_computer/data:/data heteromri
+```
+This command mounts the local directory `the_intensity_clusters_of_the_dataset_on_local_computer/data` to the /data directory in the Docker container, ensuring that your intensity cluster data is accessible within the container.
+
+#### Copying Output Files
+After the container has finished running, you can copy the output files from the container to your local machine. First, get the container ID by listing all containers:
+```
+sudo docker ps -a
+```
+Find the container ID for the `heteromri` container. Then, copy the output files using the following command:
+```
+docker cp CONTAINER_ID:/usr/src/app/output ./output
+```
+Replace `CONTAINER_ID` with the actual ID of your container. This command copies the output directory from the container to the `output` directory on your local machine.
 
 ## Citation
 If this repository was helpful for your project, please cite the following paper:
