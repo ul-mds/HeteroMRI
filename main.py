@@ -17,7 +17,7 @@ number_shuffle=range(0,20)# The number of shuffles for running
 repeat_number = range(0,10)# The number of repetitions for each shuffle state
 # Load a specific selection of MRI lists for training, evaluating, and testing, or "none" to generate random MRI lists
 load_selected_ids = "none"# Example options: "output_no_lesion_no_ADNI0/2023-10-23-12-23-14.pkl" or "none"
-output_path = "/output/"# Path for saving all model outputs
+output_path = "./output/"# Path for saving all model outputs
 initial_learning_rate = 0.0001 # Controls the weights of our model with respect to the loss gradient
 epochs = 100 # The number of epochs for training our model
 batch_size = 2 # The number of samples fed into the model at each iteration during training
