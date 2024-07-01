@@ -25,7 +25,7 @@ with open(address_data_file_name, newline='') as f:
     for row in reader:
         address_data.append(row)
 
-all_MRI_dataf=pd.read_csv(csvadata_file_name, sep='\t')
+all_MRI_dataf=pd.read_csv(csvadata_file_name, sep=',')
 all_MRI=all_MRI_dataf.values.tolist()
 headers=all_MRI_dataf.columns.values.tolist()
 Eroor_flag=False
