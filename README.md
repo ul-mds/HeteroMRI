@@ -1,5 +1,5 @@
 # HeteroMRI
-A novel method for classification of heterogenous brain MRIs. Here, heterogenous means the MRIs used for training the model have been acquired using different MRI scanners and acquisition protocols.
+A novel method for white matter-related classification of heterogenous brain FLAIR MRIs. Here, heterogenous means the MRIs are acquired using different MRI scanners and acquisition protocols.
 
 This repository contains material associated with the paper "***HeteroMRI: A method for classification of multi-scanner and multi-protocol brain MRIs with deep learning***", including:
 
@@ -34,6 +34,16 @@ First, all the MRI files should be preprocessed using the [FlexiMRIprep](https:/
 ```
 python main.py -s "422256" -m "non" -lm "" -i "./input" -o "./output" -s2 r:1
 ```
+The following parameters are used in the `antsRegistration` tool: 
+```
+--dimensionality 3, --interpolation Linear, --transform SyN[gradientStep=0.1], --metric MI[metricWeight=1, numberOfBins=32] (Mutual Information), --initial-moving-transform [initializationFeature=1] --convergence 500x400x70x30, --shrink-factors 8x4x2x1, --smoothing-sigmas 3x2x1x0vox, --use-histogram-matching 0, --winsorize-image-intensities [0.005,0.995]
+```
+and for the rest of the parameters the default values are used. 
+
+In `fuzzy_cmeans` function, the parameter values of `clusters=3, max_iterations=200`, and the default values for all the other parameters are used. 
+
+
+
   - ### Selecting the right cluster
   In the output folder of the preprocessing pipeline, for each MRI, you will find the following 3 white-matter intensity clusters:
   ```
