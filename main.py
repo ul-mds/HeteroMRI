@@ -68,17 +68,17 @@ def main(select_id_we_want,repeat_number,load_selected_ids,output_path,
 	for index in range(len(settings_selected_all_paths)):
 		for indexi in range(len(settings_selected_all_paths[index])):
 			train_mri_paths=[row[2] for row in settings_selected_all_paths[index][indexi][0]]
-			evaluation_mri_paths=[row[2] for row in settings_selected_all_paths[index][indexi][1]]
+			validation_mri_paths=[row[2] for row in settings_selected_all_paths[index][indexi][1]]
 			test_mri_paths=[row[2] for row in settings_selected_all_paths[index][indexi][2]]
 
 			train_mri_id=[row[0] for row in settings_selected_all_paths[index][indexi][0]]
-			evaluation_mri_id=[row[0] for row in settings_selected_all_paths[index][indexi][1]]
+			validation_mri_id=[row[0] for row in settings_selected_all_paths[index][indexi][1]]
 			test_mri_id=[row[0] for row in settings_selected_all_paths[index][indexi][2]]
 
 			train_mri_paths_label=[row[3] for row in settings_selected_all_paths[index][indexi][0]]
-			evaluation_mri_paths_label=[row[3] for row in settings_selected_all_paths[index][indexi][1]]
+			validation_mri_paths_label=[row[3] for row in settings_selected_all_paths[index][indexi][1]]
 			test_mri_paths_label=[row[3] for row in settings_selected_all_paths[index][indexi][2]]
-			CNN.load_MRI_files([train_mri_paths,train_mri_paths_label],[evaluation_mri_paths,evaluation_mri_paths_label],
+			CNN.load_MRI_files([train_mri_paths,train_mri_paths_label],[validation_mri_paths,validation_mri_paths_label],
 							   [test_mri_paths,test_mri_paths_label,test_mri_id])
 			for index_run in repeat_number:
 				time_info.start_record_time()
@@ -99,7 +99,7 @@ def main(select_id_we_want,repeat_number,load_selected_ids,output_path,
 				log_path = output_path+"/"+path_save
 				if output_path== "./":
 					log_path = output_path+path_save
-				io_manager.write_results(results_valid,results,[train_mri_id, evaluation_mri_id, test_mri_id],
+				io_manager.write_results(results_valid,results,[train_mri_id, validation_mri_id, test_mri_id],
 										 time_info.get_log(), time_info.get_system_info(),log_path,history_train_log)
 				time_info.remove_log()
 				time_info.reset_time_from_beginning()
