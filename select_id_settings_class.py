@@ -69,7 +69,7 @@ class select_id_settings_class:
 			list_protocols_selected.append(list_mrt.loc[list_mrt['Protocol_Group'] == protocol])
 		return list_protocols_selected
 
-	def select_mri_rows(self,list_mrt, total_no, train_no, evaluation_no, test_no):
+	def select_mri_rows(self,list_mrt, total_no, train_no, validation_no, test_no):
 		id_selected = []
 		while len(id_selected) < total_no:
 			for index in range(len(list_mrt)):
@@ -82,22 +82,22 @@ class select_id_settings_class:
 					list_mrt[index] = list_mrt[index].drop(indices)
 					id_selected.append([ID, protocols])
 		train_id = id_selected[0:train_no]
-		evaluation_id = id_selected[train_no:train_no + evaluation_no]
-		test_id = id_selected[train_no + evaluation_no:train_no + evaluation_no + test_no]
-		return [train_id, evaluation_id, test_id]
+		validation_id = id_selected[train_no:train_no + validation_no]
+		test_id = id_selected[train_no + validation_no:train_no + validation_no + test_no]
+		return [train_id, validation_id, test_id]
 
 	def select_mri(self,row_data_setting, list_mri, setting_is_protocol):
 		name_protocol_id = row_data_setting[0]
 		type_lable = row_data_setting[1]
 		total_no = row_data_setting[2]
 		train_no = row_data_setting[3]
-		evaluation_no = row_data_setting[4]
+		validation_no = row_data_setting[4]
 		test_no = row_data_setting[5]
 		filtered_mri_list = self.filter_mri_list(list_mri, name_protocol_id, type_lable, setting_is_protocol)
 		divided_filtered_protocols_mri_list = self.divide_protocols(filtered_mri_list)
-		train_id, evaluation_id, test_id = self.select_mri_rows(divided_filtered_protocols_mri_list, total_no, train_no,
-														   evaluation_no, test_no)
-		return [train_id, evaluation_id, test_id]
+		train_id, validation_id, test_id = self.select_mri_rows(divided_filtered_protocols_mri_list, total_no, train_no,
+														   validation_no, test_no)
+		return [train_id, validation_id, test_id]
 
 	def Uniform_removal_by_protocol_group(self,settings_selected, new_len):
 		settings_selected_df = pd.DataFrame(settings_selected, columns=['ID', 'Protocol_Group'])
@@ -119,22 +119,22 @@ class select_id_settings_class:
 	def remove_rows(self,settings_decoded, row_data_setting):
 
 		train_id = settings_decoded[0]
-		evaluation_id = settings_decoded[1]
+		validation_id = settings_decoded[1]
 		test_id = settings_decoded[2]
 
 
 		train_new_no = row_data_setting[3]
-		evaluation_new_no = row_data_setting[4]
+		validation_new_no = row_data_setting[4]
 		test_new_no = row_data_setting[5]
 
-		if len(train_id) < train_new_no and len(evaluation_id) < evaluation_new_no and len(test_id) < test_new_no:
-			train_id,evaluation_id,test_id=self.select_mri(row_data_setting, self.list_mri, True)
+		if len(train_id) < train_new_no and len(validation_id) < validation_new_no and len(test_id) < test_new_no:
+			train_id,validation_id,test_id=self.select_mri(row_data_setting, self.list_mri, True)
 
 		train_new_id = self.Uniform_removal_by_protocol_group(train_id, train_new_no)
-		evaluation_new_id = self.Uniform_removal_by_protocol_group(evaluation_id, evaluation_new_no)
+		validation_new_id = self.Uniform_removal_by_protocol_group(validation_id, validation_new_no)
 		test_new_id = self.Uniform_removal_by_protocol_group(test_id, test_new_no)
 
-		return [train_new_id, evaluation_new_id, test_new_id]
+		return [train_new_id, validation_new_id, test_new_id]
 
 	def generate_id_settings(self):
 		#print("generate_id_settings_start")
