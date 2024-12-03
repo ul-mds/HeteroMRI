@@ -1,6 +1,6 @@
 dataset_name,address 
 ICBM,/path_to_dataset
-ADNI,/path_to_dataset
+ADNI3,/path_to_dataset
 ISBI,/path_to_dataset
 MSSEG,/path_to_dataset
 OASIS-3,/path_to_dataset
