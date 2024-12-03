@@ -203,9 +203,9 @@ class CNN_class:
         # Remove noise
         volume = self.remove_noise_volume(volume)
         return volume
-    def load_MRI_files(self, train_mri_paths, evaluation_mri_paths, test_mri_paths):
+    def load_MRI_files(self, train_mri_paths, validation_mri_paths, test_mri_paths):
         x_train_paths, y_train = train_mri_paths
-        x_val_paths, y_val = evaluation_mri_paths
+        x_val_paths, y_val = validation_mri_paths
         x_test_paths, y_test, ID = test_mri_paths
 
         x_train = np.array([self.process_scan(path) for path in x_train_paths])
