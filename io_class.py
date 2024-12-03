@@ -38,14 +38,14 @@ class io_calss:
     def write_results(self, results_valid, results, inputs, log, system_info, path, history_train_log,
                       file_name="results.xlsx"):
         #df = pd.DataFrame(results_valid)
-        train_id, evaluation_id, test_id=inputs
+        train_id, validation_id, test_id=inputs
 
         headers = ["ID"]
         train_id=pd.DataFrame(train_id)
         train_id.columns = headers
 
-        evaluation_id=pd.DataFrame(evaluation_id)
-        evaluation_id.columns = headers
+        validation_id=pd.DataFrame(validation_id)
+        validation_id.columns = headers
 
         test_id=pd.DataFrame(test_id)
         test_id.columns = headers
@@ -54,7 +54,7 @@ class io_calss:
         results.to_excel(writer, sheet_name='Results', index=False)
         results_valid.to_excel(writer, sheet_name='Metrics', index=False)
         train_id.to_excel(writer, sheet_name='Training_Data', index=False)
-        evaluation_id.to_excel(writer, sheet_name='Validation_Data', index=False)
+        validation_id.to_excel(writer, sheet_name='Validation_Data', index=False)
         test_id.to_excel(writer, sheet_name='Test_Data', index=False)
         log.to_excel(writer, sheet_name='Runtime_Log', index=False)
         history_train_log.to_excel(writer, sheet_name='Training_Output_Log', index=False)
