@@ -34,6 +34,8 @@ First, all the MRI files should be preprocessed using the [FlexiMRIprep](https:/
 ```
 python main.py -s "422256" -m "non" -lm "" -i "./input" -o "./output" -s2 r:1
 ```
+For implementing the N4 inhomogenety correction, the `N4BiasFieldCorrectionImageFilter` class from the SimpleITK (version 2.1.1.2)  Python library with the default parameters is used.
+
 The following parameters are used in the `antsRegistration` tool: 
 ```
 --dimensionality 3, --interpolation Linear, --transform SyN[gradientStep=0.1], --metric MI[metricWeight=1, numberOfBins=32] (Mutual Information), --initial-moving-transform [initializationFeature=1] --convergence 500x400x70x30, --shrink-factors 8x4x2x1, --smoothing-sigmas 3x2x1x0vox, --use-histogram-matching 0, --winsorize-image-intensities [0.005,0.995]
