@@ -44,23 +44,6 @@ and for the rest of the parameters the default values are used.
 
 In `fuzzy_cmeans` function, the parameter values of `clusters=3, max_iterations=200`, and the default values for all the other parameters are used. 
 
-
-
-  - ### Selecting the right cluster
-  In the output folder of the preprocessing pipeline, for each MRI, you will find the following 3 white-matter intensity clusters:
-  ```
-  FLAIR_rfcm-mem1.nii.gz
-  FLAIR_rfcm-mem2.nii.gz
-  FLAIR_rfcm-mem3.nii.gz
-  ```
-Only one of these clusters will be used in the model (either for training or testing the model). In this version of the code, choosing the right intensity cluster is done manually.
-For example, consider the 3 clusters shown below for a sample MRI:
-<p align="center">
-  <img src="sample_white_matter_clusters.png" width="500"/>
-</p>
-
-In almost all MRIs (but not all) the 3 clusters look visually the same as the 3 clusters above. We are interested in cluster 3 (as it includes the traces of white-matter abnormalities in the MRIs that have white-matter abnormality). Therefore, for each MRI, we manually find the cluster that visually looks similar to cluster 3 in the figure above. The number of the desired cluster (1,2, or 3) should be entered in the `MRIs_List.csv` in the column `Selected_Cluster`. For our data, the desired cluster was cluster 3 in more than 90% of MRIs, and in the rest, it was cluster 2. 
-
 - ### Dataset(s) path
 Enter the path to the folder which includes the intensity clusters of the dataset(s) in `datasets_path.csv`.
 
