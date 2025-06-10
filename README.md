@@ -91,6 +91,23 @@ docker cp CONTAINER_ID:/usr/src/app/output ./output
 ```
 Replace `CONTAINER_ID` with the actual ID of your container. This command copies the output directory from the container to the `output` directory on your local machine.
 
+## Link to datasets
+The MRI data used in the HeteroMRI paper are all from public datasets, which are either publicly downloadable or accessible by request _to the dataset providers_. Below are the links to the datasets download/access pages. The dataset names/aliases follow the ones used in the HeteroMRI paper.
+- ISBI: https://smart-stats-tools.org/lesion-challenge-2015
+- UMCL: https://lit.fe.uni-lj.si/en/research/resources/3D-MR-MS/
+- MSSEG: https://portal.fli-iam.irisa.fr/msseg-challenge/
+- MSSEG-2: https://portal.fli-iam.irisa.fr/msseg-2/
+- BTH: https://data.mendeley.com/datasets/8bctsm8jz7/1
+- ICBM: https://ida.loni.usc.edu/
+- OASIS-3: https://sites.wustl.edu/oasisbrains/home/oasis-3/
+- ADNI 3: https://adni.loni.usc.edu/
+- CERMEP: https://doi.org/10.1186/s13550-021-00830-6 (Contact the corresponding author for data access)
+- WMH: https://dataverse.nl/dataset.xhtml?persistentId=doi:10.34894/AECRSD
+- PPMI: https://www.ppmi-info.org/
+
+
+
+
 ## Citation
 If this repository was helpful for your project, please cite the following paper:
 ```
