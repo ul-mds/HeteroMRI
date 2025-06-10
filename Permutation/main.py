@@ -14,8 +14,8 @@ config = tf.config.experimental.set_memory_growth(physical_devices[0], True)
 
 # Set settings
 select_id_we_want = ['A']# Select a list of experimental settings for running
-number_shuffle=range(0,500)# The number of shuffles for running 
-repeat_number = range(0,2)# The number of repetitions for each shuffle state
+number_shuffle=range(0,1000)# The number of shuffles for running 
+repeat_number = range(0,1)# The number of repetitions for each shuffle state
 # Load a specific selection of MRI lists for training, evaluating, and testing, or "none" to generate random MRI lists
 load_selected_ids = "none"# Example options: "output_no_lesion_no_ADNI0/2023-10-23-12-23-14.pkl" or "none"
 output_path = "./output/"# Path for saving all model outputs
