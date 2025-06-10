@@ -3,7 +3,8 @@ A novel method for white matter-related classification of heterogeneous brain FL
 
 This repository contains material associated with the paper "***HeteroMRI: Robust white matter abnormality classification across multi-scanner MRI data***", including:
 
-- `MRIs_List.csv`: The list of all MRIs (from public repositories) used in the paper 
+- `MRIs_List.csv`: The list of all MRIs (from public datasets) used in the paper in the experimental settings
+- `MRIs_List_Holdout_Set.csv`: The list of all MRIs (from public datasets) used in the paper as a hold-out set
 - `Experimental_Settings.xlsx`: The experimental settings implemented in the paper
 - The Python code that
   - selects the necessary number of MRIs from the `MRIs_List.csv` based on the `Experimental_Settings.xlsx`
