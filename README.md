@@ -110,9 +110,10 @@ The MRI data used in the HeteroMRI paper are all from public datasets, which are
 
 ## Citation
 If this repository was helpful for your project, please cite the following paper:
-```
-To be announced soon
-```
+
+<p align="justify"> 
+Abedi, Masoud, Navid Shekarchizadeh, Pierre-Louis Bazin, Nico Scherf, Julia Lier, Christa-Caroline Bergner, Wolfgang Köhler, and Toralf Kirsten. "<i>HeteroMRI: Robust white matter abnormality classification across multi-scanner MRI data.</i>" GigaScience 14 (2025): giaf092. https://doi.org/10.1093/gigascience/giaf092
+</p>
 
 ## License
 This project is licensed under the GPL-3.0 license - see the [LICENSE](LICENSE) file for details.
