@@ -1,7 +1,7 @@
 # HeteroMRI
 A novel method for white matter-related classification of heterogeneous brain FLAIR MRIs. Here, heterogenous means the MRIs are acquired using different MRI scanners and acquisition protocols.
 
-This repository contains material associated with the paper "***HeteroMRI: Robust white matter abnormality classification across multi-scanner MRI data***", including:
+This repository contains material associated with the paper "[***HeteroMRI: Robust white matter abnormality classification across multi-scanner MRI data***](https://doi.org/10.1093/gigascience/giaf092)", including:
 
 - `MRIs_List.csv`: The list of all MRIs (from public datasets) used in the paper in the experimental settings
 - `MRIs_List_Holdout_Set.csv`: The list of all MRIs (from public datasets) used in the paper as a hold-out set
