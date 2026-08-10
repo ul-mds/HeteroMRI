@@ -1,0 +1,5 @@
+ID	Dataset	Research_group	Label	Subject_ID	Gender	Protocol_Group	Scanner_Manufacturer	Scanner_Model	Magnetic_Field_Strength(Tesla)	Echo_Time(ms)	Repetition_Time(ms)	Inversion_Time(ms)	MR_Acquisition_Type	Series_Description	dim1	dim2	dim3	pixdim1(mm)	pixdim2(mm)	pixdim3(mm)	Folder_Path	Selected_Cluster	Path_Selected_Cluster_File	Prediction_Cluster2	Path_Selected_Cluster2_File	Prediction_Cluster3	Path_Selected_Cluster3_File
+MRI-0001	ALD	LD-ALD	1	IDXXXX	Male	Not Available	Philips	XXXX	3	XXX	XXXX	XXXX	3D	3D_FLAIR	XXX	XXX	XXX	XXX	XXX	XXX	nan	X	nan	insert	insert	insert	insert
+MRI-00XX	Non_ALD	LD-Non-ALD	1	IDXXXX	Female	Not Available	Philips	XXXX	3	XXX	XXXX	XXXX	3D	3D_FLAIR	XXX	XXX	XXX	XXX	XXX	XXX	nan	X	nan	insert	insert	insert	insert
+MRI-0XXX	UKL_MS	MS-Clinical	0	IDXXXX	Male	Not Available	Philips	XXXX	3	XXX	XXXX	XXXX	3D	3D_FLAIR	XXX	XXX	XXX	XXX	XXX	XXX	nan	X	nan	insert	insert	insert	insert
+MRI-0XXX	Public_MS	MSSEG	0	IDXXXX	Female	Not Available	GE MEDICAL SYSTEMS	XXXX	3	XXX	XXXX	XXXX	3D	3D FLAIR	XXX	XXX	XXX	XXX	XXX	XXX	nan	X	nan	insert	insert	insert	insert

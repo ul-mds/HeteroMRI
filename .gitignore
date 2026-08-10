@@ -1,0 +1,9 @@
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+data/
+outputs/
+checkpoints/
+__pycache__/
+.ipynb_checkpoints/
