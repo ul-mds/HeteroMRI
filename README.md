@@ -9,9 +9,11 @@ This repository contains the **updated implementation of HeteroMRI**. The curren
 The framework is not limited to this application. Researchers can utilize HeteroMRI and train it for other classification problems involving heterogeneous brain MRI data.
 
 
+---
 
-
-
+> [!CAUTION]
+> **HeteroMRI is NOT a medical device and is intended for academic research use only.**
+> Do NOT use HeteroMRI for diagnosis, prognosis, monitoring, or any other purposes in clinical use.
 
 ---
 
@@ -37,6 +39,7 @@ The original study applied HeteroMRI to the classification of brain FLAIR MRIs *
 > https://doi.org/10.1093/gigascience/giaf092
 
 The `v1.0` branch is retained to provide access to the code corresponding to that publication.
+
 
 ---
 
